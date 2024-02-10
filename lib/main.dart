@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -27,16 +28,14 @@ class MyApp extends StatelessWidget {
           onBackground: Color(0xFFE7626C),
         ),
       ),
-      home: const Scaffold(
-        body: Center(),
-      ),
+      home: const HomeScreen(),
     );
   }
 }
 /*
 Pastel Red : Color(0xFFE7626C)
-Warm yellow and white : Color(0xFF232B55)
-Blue : Color(0xFFF4EDDB)
+Warm white : Color(0xFFF4EDDB)
+Blue : Color(0xFF232B55) 
 White : Color(0xFFFFFFFE)
 
 icons : 
