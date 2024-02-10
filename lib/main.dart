@@ -3,7 +3,7 @@ import 'screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  const MyApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,13 +19,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
         cardColor: const Color(0xFFF4EDDB),
-        colorScheme: const ColorScheme.light(
-          primary: Color(0xFFE7626C),
-          secondary: Color(0xFFE7626C),
-          background: Color(0xFFE7626C),
-          onPrimary: Color(0xFFE7626C),
-          onSecondary: Color(0xFFE7626C),
-          onBackground: Color(0xFFE7626C),
+        colorScheme: ColorScheme.fromSwatch(
+          backgroundColor: const Color(0xFFE7627C),
         ),
       ),
       home: const HomeScreen(),
