@@ -11,25 +11,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData.dark(useMaterial3: true),
-      home: DefaultTabController(
-        animationDuration: Duration.zero,
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Google Fonts Demo',
-              style: GoogleFonts.getFont('Lato'),
-            ),
-            bottom: const TabBar(
-              tabs: <Widget>[
-                Tab(text: 'Simple'),
-                Tab(text: 'Select a font'),
-              ],
-            ),
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            color: Color(0xFF232B55),
           ),
         ),
+        cardColor: const Color(0xFFF4EDDB),
+        colorScheme: const ColorScheme.light(
+          primary: Color(0xFFE7626C),
+          secondary: Color(0xFFE7626C),
+          background: Color(0xFFE7626C),
+          onPrimary: Color(0xFFE7626C),
+          onSecondary: Color(0xFFE7626C),
+          onBackground: Color(0xFFE7626C),
+        ),
+      ),
+      home: const Scaffold(
+        body: Center(),
       ),
     );
   }
