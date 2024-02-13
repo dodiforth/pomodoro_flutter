@@ -10,8 +10,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Timer? _timer;
-  int _start = 25 * 60; // 25 minutes in seconds
+  int _start = 25 * 60; // 25 * 60 25 minutes in seconds
   bool _isRunning = false;
+  int _pomodoroCount = 0; // Number of pomodoros completed
 
   void startTimer() {
     _timer = Timer.periodic(
@@ -21,6 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             if (_start < 1) {
               timer.cancel();
+              _pomodoroCount += 1; // Increment the pomodoro count
+              resetTimer();
             } else {
               _start = _start - 1;
             }
@@ -125,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       .color),
                             ),
                             Text(
-                              '0',
+                              '$_pomodoroCount',
                               style: TextStyle(
                                   fontSize: 55,
                                   fontWeight: FontWeight.w600,
