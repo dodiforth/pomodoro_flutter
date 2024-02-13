@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _isRunning = false;
     });
     _timer?.cancel();
+    startTimer();
   }
 
   @override
