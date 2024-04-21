@@ -81,14 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Theme.of(context).cardColor,
                     ),
                   ),
-                  // child: Text(
-                  //   '25:00',
-                  //   style: TextStyle(
-                  //     color: Theme.of(context).cardColor,
-                  //     fontSize: 89,
-                  //     fontWeight: FontWeight.w600,
-                  //   ),
-                  // ),
                 ),
               ),
               Flexible(

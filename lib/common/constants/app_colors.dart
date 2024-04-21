@@ -16,4 +16,9 @@ class AppColors {
   static const Color faleBlue = Color.fromARGB(255, 160, 206, 222);
   static const Color brightBlue = Color.fromARGB(255, 123, 182, 212);
   static const Color salmon = Color(0xffff6666);
+  //Add specificaally for POMO
+  static const Color displayText1blue = Color(0xFF232B55);
+  static const Color warmWhite1 = Color(0xFFF4EDDB);
+  static const Color pastelRed = Color(0xFFE7626C);
+  static const Color pastelBlue = Color(0xFFA8D0E6);
 }
