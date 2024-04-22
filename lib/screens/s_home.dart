@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:pomo/common/widgets/w_time_slider.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -76,16 +78,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Text(
                     '${_start ~/ 60}:${(_start % 60).toString().padLeft(2, '0')}',
                     style: TextStyle(
-                      fontSize: 89,
+                      fontSize: 110,
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).cardColor,
                     ),
                   ),
                 ),
               ),
+              const TimeSlider(),
               Flexible(
                 //Pomodoro Timer Play Button
-                flex: 2,
+                flex: 1,
                 child: Center(
                   child: IconButton(
                       icon: _isRunning
