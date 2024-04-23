@@ -12,27 +12,38 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Timer? _timer;
-  int _start = 25 * 60; // 25 * 60 25 minutes in seconds
   bool _isRunning = false;
   int _pomodoroCount = 0; // Number of pomodoros completed
+  int _focusTimeInSecond = 15 * 60; // Default focus time is 15 minutes
+  final ValueNotifier<int> focusTimeNotifier = ValueNotifier<int>(15);
 
   void startTimer() {
+    if (_timer != null) {
+      _timer?.cancel();
+    }
     _timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) {
         if (_isRunning) {
           setState(() {
-            if (_start < 1) {
+            if (_focusTimeInSecond < 1) {
               timer.cancel();
               _pomodoroCount += 1; // Increment the pomodoro count
               resetTimer();
-            } else {
-              _start = _start - 1;
+            } else if (_isRunning) {
+              _focusTimeInSecond -= 1;
             }
           });
         }
       },
     );
+  }
+
+  void updateTime(int minutes) {
+    setState(() {
+      _focusTimeInSecond = minutes * 60; // Convert minutes to seconds
+    });
+    startTimer();
   }
 
   void resumeAndPauseTimer() {
@@ -43,11 +54,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void resetTimer() {
     setState(() {
-      _start = 25 * 60;
+      _focusTimeInSecond = 15 * 60;
       _isRunning = false;
     });
     _timer?.cancel();
-    startTimer();
+    focusTimeNotifier.value = 15;
+    startTimer(); // Start the timer after cancelling the previous one
   }
 
   @override
@@ -76,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(
                   alignment: Alignment.bottomCenter,
                   child: Text(
-                    '${_start ~/ 60}:${(_start % 60).toString().padLeft(2, '0')}',
+                    '${_focusTimeInSecond ~/ 60}:${(_focusTimeInSecond % 60).toString().padLeft(2, '0')}',
                     style: TextStyle(
                       fontSize: 110,
                       fontWeight: FontWeight.w600,
@@ -85,7 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              const TimeSlider(),
+              TimeSlider(
+                onTimeSelected: updateTime,
+                focusTimeNotifier: focusTimeNotifier,
+              ),
               Flexible(
                 //Pomodoro Timer Play Button
                 flex: 1,

@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pomo/common/constants/app_colors.dart';
 
 class TimeSlider extends StatefulWidget {
-  const TimeSlider({super.key});
+  final Function(int) onTimeSelected;
+  final ValueNotifier<int> focusTimeNotifier;
+
+  const TimeSlider(
+      {super.key,
+      required this.onTimeSelected,
+      required this.focusTimeNotifier});
 
   @override
   State<TimeSlider> createState() => _TimeSliderState();
@@ -10,6 +16,24 @@ class TimeSlider extends StatefulWidget {
 
 class _TimeSliderState extends State<TimeSlider> {
   double _focusTime = 15; // Initialize with the minimum focus time
+
+  @override
+  void initState() {
+    super.initState();
+    widget.focusTimeNotifier.addListener(updateSlider);
+  }
+
+  void updateSlider() {
+    setState(() {
+      _focusTime = widget.focusTimeNotifier.value.toDouble();
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.focusTimeNotifier.removeListener(updateSlider);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +67,9 @@ class _TimeSliderState extends State<TimeSlider> {
             onChanged: (double value) {
               setState(() {
                 _focusTime = value;
+                widget.onTimeSelected(_focusTime.round());
+                widget.focusTimeNotifier.value =
+                    _focusTime.round(); // Update the ValueNotifier
               });
             },
           ),
