@@ -16,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _pomodoroCount = 0; // Number of pomodoros completed
   int _focusTimeInSecond = 15 * 60; // Default focus time is 15 minutes
   final ValueNotifier<int> focusTimeNotifier = ValueNotifier<int>(15);
+  int _userSelectedTimeInSecond = 15 * 60; // Default value is 15 minutes
 
   void startTimer() {
     if (_timer != null) {
@@ -42,6 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void updateTime(int minutes) {
     setState(() {
       _focusTimeInSecond = minutes * 60; // Convert minutes to seconds
+      _userSelectedTimeInSecond =
+          _focusTimeInSecond; // Store the user's selected time
     });
     startTimer();
   }
@@ -54,11 +57,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void resetTimer() {
     setState(() {
-      _focusTimeInSecond = 15 * 60;
+      _focusTimeInSecond = _userSelectedTimeInSecond;
       _isRunning = false;
     });
     _timer?.cancel();
-    focusTimeNotifier.value = 15;
+    focusTimeNotifier.value =
+        _userSelectedTimeInSecond ~/ 60; // Reset the slider
     startTimer(); // Start the timer after cancelling the previous one
   }
 
