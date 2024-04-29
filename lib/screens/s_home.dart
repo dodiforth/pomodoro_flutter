@@ -104,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
               TimeSlider(
                 onTimeSelected: updateTime,
                 focusTimeNotifier: focusTimeNotifier,
+                isRunning: _isRunning,
               ),
               Flexible(
                 //Pomodoro Timer Play Button

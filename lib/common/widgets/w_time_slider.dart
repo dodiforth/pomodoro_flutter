@@ -4,11 +4,13 @@ import 'package:pomo/common/constants/app_colors.dart';
 class TimeSlider extends StatefulWidget {
   final Function(int) onTimeSelected;
   final ValueNotifier<int> focusTimeNotifier;
+  bool isRunning;
 
-  const TimeSlider(
+  TimeSlider(
       {super.key,
       required this.onTimeSelected,
-      required this.focusTimeNotifier});
+      required this.focusTimeNotifier,
+      required this.isRunning});
 
   @override
   State<TimeSlider> createState() => _TimeSliderState();
@@ -64,14 +66,16 @@ class _TimeSliderState extends State<TimeSlider> {
             max: 55,
             divisions: 8, // This allows users to select a value every 5 minutes
             label: _focusTime.round().toString(),
-            onChanged: (double value) {
-              setState(() {
-                _focusTime = value;
-                widget.onTimeSelected(_focusTime.round());
-                widget.focusTimeNotifier.value =
-                    _focusTime.round(); // Update the ValueNotifier
-              });
-            },
+            onChanged: widget.isRunning
+                ? null
+                : (double value) {
+                    setState(() {
+                      _focusTime = value;
+                      widget.onTimeSelected(_focusTime.round());
+                      widget.focusTimeNotifier.value =
+                          _focusTime.round(); // Update the ValueNotifier
+                    });
+                  },
           ),
         ),
       ],
